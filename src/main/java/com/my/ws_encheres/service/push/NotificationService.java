@@ -103,7 +103,7 @@ public class NotificationService {
     }
     @Scheduled(fixedRate = 60_000)
     public void runTask() {
-//        System.out.println("yosh ");
+        System.out.println("yosh ");
         try {
             isTerminate();
         } catch (FirebaseMessagingException e) {

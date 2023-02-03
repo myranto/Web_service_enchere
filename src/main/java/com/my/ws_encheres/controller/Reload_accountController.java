@@ -21,17 +21,17 @@ public class Reload_accountController {
 
     @PostMapping
     public ResponseEntity<ToJsonData> create(@RequestBody Reload_account rap){
-        s.isTerminate();
+//        s.isTerminate();
         return service.save(rap);
     }
     @GetMapping
     public ResponseEntity<ToJsonData> get_all(){
-        s.isTerminate();
+//        s.isTerminate();
         return service.selectAll();
     }
     @GetMapping("{id}")
     public ResponseEntity<ToJsonData> findAllbyReloadAccount(@PathVariable("id")int id){
-        s.isTerminate();
+//        s.isTerminate();
         return service.findAllById(id);
     }
 }

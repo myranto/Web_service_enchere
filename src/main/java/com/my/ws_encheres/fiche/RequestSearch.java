@@ -83,6 +83,21 @@ public class RequestSearch {
         }
         return condition;
     }
+    private String constructKeyword(String key){
+        String sql = "(";
+        String[] tab = key.split(" ");
+        if (key==null)
+            return " 1=1 ";
+        for (int i = 0; i < tab.length; i++) {
+            if (i== tab.length-1)
+            {
+                sql+="upper(description) like upper('%"+tab[i]+"%'))";
+                break;
+            }
+            sql+="upper(description) like upper('%"+tab[i]+"%') or ";
+        }
+        return sql;
+    }
     private String getDateCondition(){
 
         if ((date_min == null) && (date_max==null)){
@@ -97,7 +112,7 @@ public class RequestSearch {
     public String createQuery(){
         String condP = (getPrix()==-1)?" 4=4 ":" (prix_vente <= "+getPrix()+" ) ";
         String condS = (getStatus()==-1)?" 5=5 ":" (status= "+getStatus()+" ) ";
-        String sql = "select * from Enchere where upper(description) like upper('%"+getKeyWord()+"%') and 3=3 and "+condS+"and"+condP+" and "+getConditionCatego()+" and "+getDateCondition();
+        String sql = "select * from Enchere where 1=1 and "+constructKeyword(getKeyWord())+" and 3=3 and "+condS+"and"+condP+" and "+getConditionCatego()+" and "+getDateCondition();
         System.out.println(sql);
         return sql;
     }

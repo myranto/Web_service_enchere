@@ -1,6 +1,7 @@
 package com.my.ws_encheres.controller;
 
 import com.my.ws_encheres.FormatToJson.ToJsonData;
+import com.my.ws_encheres.fiche.EnchereParam;
 import com.my.ws_encheres.model.enchere.Enchere;
 import com.my.ws_encheres.model.enchere.EnchereCli;
 import com.my.ws_encheres.service.EnchereCliService;
@@ -20,9 +21,13 @@ public class EnchereController {
         this.service = service;
         this.cli = cli;
     }
+//    @PostMapping("/create")
+//    public ResponseEntity<ToJsonData> create(@RequestBody Enchere enchere){
+//        return service.createEnchere(enchere);
+//    }
     @PostMapping("/create")
-    public ResponseEntity<ToJsonData> create(@RequestBody Enchere enchere){
-        return service.createEnchere(enchere);
+    public ResponseEntity<ToJsonData> create(@RequestBody EnchereParam enchere){
+        return service.createEnchereReal(enchere);
     }
     @GetMapping("/select")
     public ResponseEntity<ToJsonData> SelectAllEnchere(){
@@ -30,7 +35,8 @@ public class EnchereController {
     }
     @GetMapping("/select/{idclient}")
     public ResponseEntity<ToJsonData> getbyIdclient(@PathVariable("idclient") int idclient){
-        return service.selectClientEnchere(idclient);
+        return service.selectClientEnchereReal(idclient);
+//        return service.selectClientEnchere(idclient);
     }
     @PostMapping("/encherir")
     public ResponseEntity<ToJsonData> encherir(@RequestBody EnchereCli enc,@RequestParam("token") String token){

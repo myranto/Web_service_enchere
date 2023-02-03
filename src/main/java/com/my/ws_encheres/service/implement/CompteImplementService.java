@@ -25,8 +25,13 @@ public class CompteImplementService implements CompteService {
     public ResponseEntity<ToJsonData> getAccount(int idclient) {
         try {
             Compte client = rep.findCompteByIdclientOrderByIdDescLimit1(idclient);
-            if (client==null)
-                throw new Exception("account not found for id:"+idclient);
+            if (client==null){
+//                throw new Exception("account not found for id:"+idclient);
+                client = new Compte();
+                client.setIdclient(idclient);
+                client.setVola(0);
+                rep.save(client);
+            }
             return new ResponseEntity<ToJsonData>(new ToJsonData(client,null), HttpStatus.OK);
         }catch (Exception e){
             e.printStackTrace();

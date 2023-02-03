@@ -1,7 +1,10 @@
 package com.my.ws_encheres.service.implement;
 
 import com.my.ws_encheres.FormatToJson.ToJsonData;
+import com.my.ws_encheres.Repository.PhotoRepository;
+import com.my.ws_encheres.fiche.EnchereParam;
 import com.my.ws_encheres.fiche.RequestSearch;
+import com.my.ws_encheres.model.Photo;
 import com.my.ws_encheres.model.enchere.Enchere;
 import com.my.ws_encheres.service.SearchEnchere;
 import jakarta.persistence.EntityManager;
@@ -11,12 +14,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class SearchImplementService implements SearchEnchere {
     @PersistenceContext
     EntityManager entity;
+    private final PhotoRepository pho ;
+
+    public SearchImplementService(PhotoRepository pho) {
+        this.pho = pho;
+    }
+
 
     @Override
     public List<Enchere> searchByKeyWord(String key) {
@@ -32,7 +42,12 @@ public class SearchImplementService implements SearchEnchere {
         try {
             Query query = entity.createNativeQuery(o.createQuery(), Enchere.class);
             List<Enchere> list = query.getResultList();
-            return new ResponseEntity<ToJsonData>(new ToJsonData(list,null), HttpStatus.OK);
+            ArrayList<EnchereParam> finale = new ArrayList<>();
+            for (Enchere l:list) {
+                ArrayList<Photo> list_pic = pho.findAllByIdEnchere(l.getId());
+                finale.add(new EnchereParam(l,list_pic));
+            }
+            return new ResponseEntity<ToJsonData>(new ToJsonData(finale,null), HttpStatus.OK);
 
         }catch (Exception e){
             e.printStackTrace();

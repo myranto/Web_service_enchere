@@ -32,7 +32,7 @@ public class ClientController {
     @GetMapping("/checkToken/{id}/{token}")
     public ResponseEntity<ToJsonData> isConnected(@PathVariable("id") int id, @PathVariable("token") String token){
         try {
-            s.isTerminate();
+//            s.isTerminate();
             tok_service.checkTokens(token,id);
             return new ResponseEntity<>(new ToJsonData<>("is connected true",null),HttpStatus.OK);
         }catch (Exception e){
@@ -62,14 +62,14 @@ public class ClientController {
 //    voir compte client
     @GetMapping("/account/{id}")
     public ResponseEntity<ToJsonData> getAccountCli(@PathVariable("id") int idclient){
-        s.isTerminate();
+//        s.isTerminate();
 
         return account.getAccount(idclient);
     }
 
     @PostMapping("/search")
     public ResponseEntity<ToJsonData> SearchAvance(@RequestBody RequestSearch enchere){
-        s.isTerminate();
+//        s.isTerminate();
         return search.searchAdvanced(enchere);
     }
 

@@ -23,26 +23,26 @@ public class CategorieController {
 //    creation de categorie
     @PostMapping
     public ResponseEntity<ToJsonData> create(@RequestBody Categorie catego){
-        s.isTerminate();
+//        s.isTerminate();
             return service.save(catego);
     }
     @PutMapping("{idc}/{name}")
     public ResponseEntity<ToJsonData> update(@PathVariable("idc") int toUp,@PathVariable("name") String name){
-        s.isTerminate();
+//        s.isTerminate();
 
         return service.update(toUp,name);
     }
 //    select all categorie from database
     @GetMapping
     public ResponseEntity<ToJsonData> get_all(){
-        s.isTerminate();
+//        s.isTerminate();
 
         return service.selectAll();
     }
 
     @GetMapping("{id}")
     public ResponseEntity<ToJsonData> findAllbyID(@PathVariable("id")int id){
-        s.isTerminate();
+//        s.isTerminate();
 
         return service.findAllById(id);
     }

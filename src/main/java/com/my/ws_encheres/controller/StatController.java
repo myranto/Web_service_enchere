@@ -20,7 +20,7 @@ public class StatController {
     }
     @GetMapping("/select")
     public ResponseEntity<ToJsonData> stat(){
-        s.isTerminate();
+//        s.isTerminate();
         return rep.getStat();
     }
 }

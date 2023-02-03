@@ -13,6 +13,9 @@ import org.hibernate.annotations.ColumnDefault;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -49,17 +52,21 @@ public class Enchere  {
     @ManyToOne(optional=false)
     @JoinColumn(name="idcategorie", nullable=false, updatable=false)
     private Categorie idcategorie;
-    @OneToMany(targetEntity = EnchereCli.class,cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = EnchereCli.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "idenchere",referencedColumnName = "id")
     private List<EnchereCli> list_rencher;
 
     public List<EnchereCli> getList_rencher() {
+        try {
+            System.out.println("size o"+list_rencher.size());
+        Collections.sort(list_rencher,Comparator.comparing(EnchereCli::getMontant).reversed());
+
+        }catch (Exception e){
+//            e.printStackTrace();
+        }
         return list_rencher;
     }
 
-    public void setList_rencher(List<EnchereCli> list_rencher) {
-        this.list_rencher = list_rencher;
-    }
 
     @Column(name = "duree", nullable = false)
     private int duree;
@@ -68,76 +75,4 @@ public class Enchere  {
     @Column(name = "status")
     private int status=0;
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Timestamp getDate_enchere() {
-        return date_enchere;
-    }
-
-    public void setDate_enchere(Timestamp date_enchere) {
-        this.date_enchere = date_enchere;
-    }
-
-
-    public double getPrix_vente() {
-        return prix_vente;
-    }
-
-    public void setPrix_vente(double prix_vente) {
-        this.prix_vente = prix_vente;
-    }
-
-    public double getPrix_mise_enchere() {
-        return prix_mise_enchere;
-    }
-
-    public void setPrix_mise_enchere(double prix_mise_enchere) {
-        this.prix_mise_enchere = prix_mise_enchere;
-    }
-
-
-    public int getDuree() {
-        return duree;
-    }
-
-    public void setDuree(int dure) {
-        this.duree = dure;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public Categorie getIdcategorie() {
-        return idcategorie;
-    }
-
-    public void setIdcategorie(Categorie idcategorie) {
-        this.idcategorie = idcategorie;
-    }
-//    public int getIdcategorie() {
-//        return idcategorie;
-//    }
-//
-//    public void setIdcategorie(int idcategorie) {
-//        this.idcategorie = idcategorie;
-//    }
 }

@@ -45,7 +45,7 @@ public class ClientController {
         return serve.login(cli);
     }
 //    se deconnecter
-    @DeleteMapping("/log_out/{id}")
+    @GetMapping("/log_out/{id}")
     public ResponseEntity<ToJsonData>LogOut(@PathVariable("id") int id){
         try {
 

@@ -47,6 +47,7 @@ public class NotificationService {
     public List<Fire_token> getListToken(List<EnchereCli> list,Client autor){
         List<Fire_token> res = new ArrayList<>();
         try {
+            res.add(fire.findTokenByIdClient(autor.getId()));
 
         }catch (Exception e){}
         res.add(fire.findTokenByIdClient(autor.getId()));

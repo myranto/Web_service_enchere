@@ -43,7 +43,7 @@ public class NotificationController {
     }
     @PostMapping("/save_token")
     public ResponseEntity<ToJsonData> saveToken(@RequestBody Fire_token tok) {
-        System.out.println("sousous");
+        System.out.println("sousous  "+tok.getToken());
         service.save(tok);
         return new ResponseEntity<ToJsonData>(new ToJsonData<>("success",null),HttpStatus.OK);
     }

@@ -58,7 +58,7 @@ public class Enchere  {
 
     public List<EnchereCli> getList_rencher() {
         try {
-            System.out.println("size o"+list_rencher.size());
+            System.out.println("size o "+list_rencher.size());
         Collections.sort(list_rencher,Comparator.comparing(EnchereCli::getMontant).reversed());
 
         }catch (Exception e){

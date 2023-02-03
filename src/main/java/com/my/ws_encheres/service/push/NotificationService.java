@@ -46,14 +46,17 @@ public class NotificationService {
     }
     public List<Fire_token> getListToken(List<EnchereCli> list,Client autor){
         List<Fire_token> res = new ArrayList<>();
-        res.add(fire.findTokenByIdClient(autor.getId()));
         try {
+
+        }catch (Exception e){}
+        res.add(fire.findTokenByIdClient(autor.getId()));
             for (EnchereCli t:list) {
+                try {
                 Fire_token f = fire.findTokenByIdClient(t.getIdclient().getId());
                 res.add(f);
+                    }catch (Exception e){}
             }
-        }catch (Exception e){}
-        return res;
+                    return res;
     }
     public void sendNotification(List<EnchereCli> list,Client autor) throws FirebaseMessagingException {
         List<Fire_token> token = getListToken(list, autor);
@@ -103,11 +106,10 @@ public class NotificationService {
     }
     @Scheduled(fixedRate = 60_000)
     public void runTask() {
-//        System.out.println("yosh ");
         try {
             isTerminate();
         } catch (FirebaseMessagingException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 }

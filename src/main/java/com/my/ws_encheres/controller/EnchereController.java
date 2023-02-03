@@ -46,4 +46,8 @@ public class EnchereController {
     public ResponseEntity<ToJsonData> Historique(@PathVariable("id") int idclient){
         return service.selectClientEnchereFinished(idclient);
     }
+    @GetMapping("{idenchere}")
+    public ResponseEntity<ToJsonData> findByEnchere(@PathVariable("idenchere")int idenchere){
+            return service.findByEnchere(idenchere);
+    }
 }

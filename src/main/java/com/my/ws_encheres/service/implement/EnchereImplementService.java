@@ -121,6 +121,23 @@ public class EnchereImplementService implements EnchereService {
     }
 
     @Override
+    public ResponseEntity<ToJsonData> findByEnchere(int idenchere) {
+        try {
+//            isTerminate();
+            Enchere list = rep.findTopById(idenchere);
+
+            if (list == null) {
+                throw new Exception("Not enchere found");
+            }
+                ArrayList<Photo> list_pic = pho.findAllByIdEnchere(list.getId());
+                EnchereParam finale= new EnchereParam(list,list_pic);
+            return new ResponseEntity<>(new ToJsonData(finale,null), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<ToJsonData>(new ToJsonData(null,e.getMessage()), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @Override
     public void isTerminate() {
 //        ArrayList<Enchere> list_nontapitra = rep.findEnchereNotFinish();
 //        for (Enchere e:list_nontapitra) {

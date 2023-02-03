@@ -18,4 +18,6 @@ public interface EnchereRepository extends JpaRepository<Enchere,Integer> {
 
         @Query("select c from Enchere c where c.status=1 and c.idclient.id=:idclient order by c.id asc ")
         ArrayList<Enchere> findEnchereByIdclientAndStatusEquals(int idclient);
+
+        Enchere findTopById(int idenchere);
 }

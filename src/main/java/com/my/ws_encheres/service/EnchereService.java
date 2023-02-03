@@ -12,5 +12,6 @@ public interface EnchereService {
     public ResponseEntity<ToJsonData> selectClientEnchere(int idclient);
     public ResponseEntity<ToJsonData> selectClientEnchereReal(int idclient);
     public ResponseEntity<ToJsonData> selectClientEnchereFinished(int idclient);
+    public ResponseEntity<ToJsonData> findByEnchere(int idenchere);
     public void isTerminate();
 }

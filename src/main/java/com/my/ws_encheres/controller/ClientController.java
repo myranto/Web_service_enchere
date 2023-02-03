@@ -56,7 +56,6 @@ public class ClientController {
     }
     @PostMapping("/inscription")
     public ResponseEntity<ToJsonData> Inscription(@RequestBody Client cli){
-
         return  serve.creates(cli);
     }
 //    voir compte client
